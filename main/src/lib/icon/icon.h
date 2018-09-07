@@ -43,6 +43,7 @@ public:
 
 	bool update() {
 		DWORD t1 = timeGetTime(); //---------------------------------------------
+    UNREFERENCED_PARAMETER(t1);
 
 		// アイテムのアイコン範囲座標取得
 		rc.left = LVIR_ICON; // アイコン部分とテキスト部分の両方の範囲取得
@@ -75,6 +76,8 @@ public:
     }
 
 		DWORD t2 = timeGetTime(); //---------------------------------------------
+    UNREFERENCED_PARAMETER(t2);
+
 		//if (t2 - t1 > 4) Debug::cout(std::to_wstring(t2 - t1).c_str());
 
 		// 処理終了

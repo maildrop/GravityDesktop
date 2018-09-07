@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "obj.h"
 #include "../Win32/Debug.h"
 

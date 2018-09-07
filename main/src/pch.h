@@ -5,13 +5,6 @@
 
 #pragma once
 
-#pragma comment(lib,"dxgi.lib")
-#ifdef _DEBUG
-#pragma comment(lib, "DirectXTK_d.lib")
-#else
-#pragma comment(lib, "DirectXTK.lib")
-#endif
-
 #include <WinSDKVer.h>
 #if !defined( _WIN32_WINNT )
 /*
@@ -61,6 +54,15 @@
 #include <SpriteBatch.h>
 #include <WICTextureLoader.h>
 #include <SimpleMath.h>
+
+
+#pragma comment(lib,"dxgi.lib")
+#ifdef _DEBUG
+#pragma comment(lib, "DirectXTK_d.lib")
+#else
+#pragma comment(lib, "DirectXTK.lib")
+#endif
+
 
 namespace DX
 {

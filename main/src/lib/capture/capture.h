@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../dxtk/pch.h"
+#include "pch.h"
 
 using namespace Microsoft::WRL;
 using namespace Microsoft::WRL::Details;
@@ -46,12 +46,16 @@ protected:
 		case D3D11_ERROR_DEFERRED_CONTEXT_MAP_WITHOUT_INITIAL_DISCARD:
 			error_text += "(D3D11_ERROR_DEFERRED_CONTEXT_MAP_WITHOUT_INITIAL_DISCARD)";
 			break;
+#if 0 
 			//case D3DERR_INVALIDCALL:
 			error_text += "(D3DERR_INVALIDCALL)";
 			break;
+#endif 
+#if 0
 			//case D3DERR_WASSTILLDRAWING:
 			error_text += "(D3DERR_WASSTILLDRAWING)";
 			break;
+#endif
 		case E_FAIL:
 			error_text += "(E_FAIL)";
 			break;

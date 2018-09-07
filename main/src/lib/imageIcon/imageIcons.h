@@ -13,8 +13,8 @@ private:
 	std::vector<gdObj> wall;
 	gdBox WorldRect;
 	float mostNear = 0.0f;
-	size_t mostNearIndex = -1;
-	size_t drugIndex = -1;
+	int mostNearIndex = -1;
+	int drugIndex = -1;
 	double start_time = 1.0; // アニメーションが開始されるまでの時間(s)
 	double time = 0.0; // アニメーションが開始されるまでの間の経過時間(s)
 	bool exitFlag = 0; // 終了フラグ
@@ -28,11 +28,11 @@ private:
 		for (size_t i = 0; i < obj.size(); i++) {
 			if (obj[i].getOnMouse()) {
 				if (mostNearIndex == -1) {
-					mostNearIndex = i;
+					mostNearIndex = static_cast<int>(i);
 					mostNear = obj[i].getLocalMouse().Length();
 				}
 				if (obj[i].getLocalMouse().Length() < mostNear) {
-					mostNearIndex = i;
+					mostNearIndex = static_cast<int>(i);
 					mostNear = obj[i].getLocalMouse().Length();
 				}
 			}

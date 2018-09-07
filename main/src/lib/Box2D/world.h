@@ -28,6 +28,7 @@ private:
 
 public:
 	bool init(float size_x, float size_y);
+  bool init(LONG size_x, LONG size_y);
 	bool init(HWND hwnd);
 	void update(bool stop = 0);
 	void setGravity(float x, float y);

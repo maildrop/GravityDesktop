@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "Debug.h"
 
 void Debug::cout(std::wstring text) {

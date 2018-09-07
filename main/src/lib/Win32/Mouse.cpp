@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "Mouse.h"
 #include <string>
 
@@ -43,7 +44,7 @@ bool Mouse::loop() {
 	wheel.y = 0.0;
 
 	// メッセージ処理
-	for (int i = 0; i < Messages::use_list.size(); i++) {
+	for (decltype(Messages::use_list.size())  i = 0; i < Messages::use_list.size(); i++) {
 		switch (Messages::use_list[i].message)
 		{
 		case WM_LBUTTONDBLCLK:

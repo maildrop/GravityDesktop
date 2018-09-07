@@ -1,6 +1,6 @@
 #pragma once
 
-#include "..\DXTK\pch.h"
+#include "pch.h"
 #include "..\capture\all_inc.h"
 #include "..\Win32\all_inc.h"
 #include "..\imageIcon\imageIcons.h"

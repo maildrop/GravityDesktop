@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../dxtk/pch.h"
+#include "pch.h"
 #include "Box2D/Box2D.h"
 
 using gdVec1 = float;

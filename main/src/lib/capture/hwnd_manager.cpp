@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "hwnd_manager.h"
 
 HWND gdHwndManager::desk;
@@ -80,7 +81,7 @@ void gdHwndManager::reload() {
 
 void gdHwndManager::cover(HWND hwnd) {
 	HWND h; // ハンドル一時代入用バッファ
-	LONG style; // スタイル一時保持バッファ
+// 	LONG style; // スタイル一時保持バッファ
 
 	// 壁紙ウィンドウの透明度を100%にする
 	// 壁紙ウィンドウを有効化する
@@ -136,7 +137,8 @@ void gdHwndManager::show(HWND hwnd) {
 
 void gdHwndManager::exit(HWND hwnd) {
 	HWND h; // ハンドル一時代入用バッファ
-	LONG style; // スタイル一時保持バッファ
+	//LONG style; // スタイル一時保持バッファ
+  UNREFERENCED_PARAMETER(hwnd);
 
 	ResetHook();
 

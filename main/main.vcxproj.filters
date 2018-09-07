@@ -16,7 +16,6 @@
     <ClInclude Include="src\lib\common\box.h" />
     <ClInclude Include="src\lib\common\general.h" />
     <ClInclude Include="src\lib\dxtk\Game.h" />
-    <ClInclude Include="src\lib\dxtk\pch.h" />
     <ClInclude Include="src\lib\dxtk\StepTimer.h" />
     <ClInclude Include="src\lib\icon\icon.h" />
     <ClInclude Include="src\lib\icon\Icons.h" />
@@ -28,6 +27,7 @@
     <ClInclude Include="src\lib\Win32\Messages.h" />
     <ClInclude Include="src\lib\Win32\Mouse.h" />
     <ClInclude Include="src\memo.h" />
+    <ClInclude Include="src\pch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\lib\Box2D\obj.cpp" />
@@ -36,12 +36,12 @@
     <ClCompile Include="src\lib\common\box.cpp" />
     <ClCompile Include="src\lib\common\general.cpp" />
     <ClCompile Include="src\lib\dxtk\Game.cpp" />
-    <ClCompile Include="src\lib\dxtk\pch.cpp" />
     <ClCompile Include="src\lib\Win32\Debug.cpp" />
     <ClCompile Include="src\lib\Win32\Keyboard.cpp" />
     <ClCompile Include="src\lib\Win32\Messages.cpp" />
     <ClCompile Include="src\lib\Win32\Mouse.cpp" />
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\pch.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />

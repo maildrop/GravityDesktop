@@ -1,8 +1,8 @@
 //
 // Main.cpp
 //
+#include "pch.h"
 
-#include "lib\dxtk\pch.h"
 #include "lib\dxtk\Game.h"
 
 #include <string>

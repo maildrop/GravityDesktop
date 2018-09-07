@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../dxtk/pch.h"
+#include "pch.h"
 #include "Messages.h"
 #include "../capture/all_inc.h"
 

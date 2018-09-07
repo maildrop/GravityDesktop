@@ -41,7 +41,12 @@ public:
 
 		// アイコン数に変更があれば配列そのものを更新
 		if (icon.size() != num_items) {
-      std::swap(icon, std::vector<gdIcon>(num_items));
+
+      { // swap 
+        std::vector<gdIcon> new_iconvec(num_items);
+        icon.swap(new_iconvec);
+      }
+
       gdIcon::index_type index = 0;
       for (auto& i : icon) {
         i.init(hwnd, pid_h, ptr, index++);
@@ -60,7 +65,7 @@ public:
 		lvi.state = 0;
 		lvi.stateMask = LVIS_FOCUSED | LVIS_SELECTED;
 		if (WriteProcessMemory(pid_h, ptr, &lvi, sizeof(LVITEM), &numRead) == 0) return 1; // ptrにitem代入
-		SendMessage(hwnd, LVM_SETITEMSTATE, -1, (LPARAM)ptr);
+    SendMessage(hwnd, LVM_SETITEMSTATE, static_cast<WPARAM>(int{ -1 }), (LPARAM)ptr);
 		// フォーカスを有効化する為にウィンドウをアクティブにする
 		SendMessage(hwnd, WM_ACTIVATE, WA_CLICKACTIVE, 0);
 		return 0;

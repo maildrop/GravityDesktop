@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "Keyboard.h"
 #include <string>
 #include "Debug.h"
@@ -13,7 +14,7 @@ bool Keyboard::loop() {
 	Esc.reset();
 
 	// メッセージ処理
-	for (int i = 0; i < Messages::use_list.size(); i++) {
+	for (decltype(Messages::use_list.size() ) i = 0; i < Messages::use_list.size(); i++) {
 		LPARAM mes = Messages::use_list[i].message;
 		if ((mes == WM_KEYDOWN) || (mes == WM_KEYUP)) {
 			switch (Messages::use_list[i].wParam) {

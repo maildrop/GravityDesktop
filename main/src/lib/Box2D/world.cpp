@@ -1,6 +1,9 @@
+#include "pch.h"
 #include "world.h"
 
-bool gdWorld::init(float size_x, float size_y) {
+
+bool gdWorld::init(float size_x, float size_y) 
+{
 	// 代入
 	size.size(size_x, size_y);
 	rate = max_size / size.size().y; // Box2Dの空間の縦軸最大値をmax_sizeに設定					
@@ -18,10 +21,21 @@ bool gdWorld::init(float size_x, float size_y) {
 	bottom_wall->init(this, gdBox({ size.size().x,10.0f }, { size.size().x / 2.0f, size.size().y + 5.0f }), false);
 	return 0;
 }
+
+/**
+  init( float , float) と精度違いの初期化用
+  本来の計算精度はfloatであるが、HWND の精度は LONG なので、そのギャップを埋めるための
+  コンビニエンスなinit() 単純なラッパ
+*/
+bool gdWorld::init(LONG size_x, LONG size_y)
+{
+  return init(static_cast<float>(size_x), static_cast<float>(size_y));
+}
+
 bool gdWorld::init(HWND hwnd) {
 	RECT rc;
 	GetWindowRect(hwnd, &rc);
-	return init(rc.right - rc.left, rc.bottom - rc.top);
+	return init(rc.right - rc.left, rc.bottom - rc.top );
 }
 void gdWorld::update(bool stop) {
 	// 現在のフレームレート取得
