@@ -13,7 +13,15 @@
 #endif
 
 #include <WinSDKVer.h>
+#if !defined( _WIN32_WINNT )
+/*
+  _WIN32_WINNT は、Windows の 動作バージョンを指定するマクロ定義なのではあるが、
+  一つ目はコンパイルスイッチで定義する場合がある。
+  二つ目はコンパイルスイッチで定義されなかった場合はここで定義する必要がある
+  これを意図するために _WIN32_WINNT が定義されていない場合のみここで定義することにする。
+*/
 #define _WIN32_WINNT 0x0601
+#endif /* !defined( _WIN32_WINNT ) */
 #include <SDKDDKVer.h>
 
 // Use the C++ standard templated min/max

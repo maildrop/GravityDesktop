@@ -51,8 +51,8 @@ public:
 			Mouse::getCursor().y - image_all.position().y,
 			Mouse::getCursor().x - image_all.position().x
 		) - image_all.angle();
-		local_mouse.x = std::cos(angle)*len;
-		local_mouse.y = std::sin(angle)*len;
+    local_mouse.x = static_cast<decltype(local_mouse.x)>(std::cos(angle)*len);
+		local_mouse.y = static_cast<decltype(local_mouse.y)>(std::sin(angle)*len);
 		// カーソルがアイコン上にあるか判定
 		on_mouse =
 			std::abs(local_mouse.x) <= icon->all.size().x / 2.0f &&
