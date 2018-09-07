@@ -99,7 +99,7 @@ void gdHwndManager::cover(HWND hwnd) {
 	}
 
 	// 親ウィンドウの設定
-	SetParent(hwnd, wallPaper); // 親ウィンドウを壁紙に設定
+	// SetParent(hwnd, wallPaper); // 親ウィンドウを壁紙に設定
 
 	RECT rc;
 	GetWindowRect(wallPaper, &rc);
