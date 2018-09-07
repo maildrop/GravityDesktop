@@ -15,7 +15,7 @@ RECT targetRect;
 
 HINSTANCE hInst;
 
-bool SetHook(HWND set_hwnd, HWND set_target)
+EXPORT_API_ bool CALLBACK SetHook(HWND set_hwnd, HWND set_target)
 {
 	hwnd = set_hwnd;
 	target = set_target;
@@ -31,13 +31,13 @@ bool SetHook(HWND set_hwnd, HWND set_target)
 	return 0;
 }
 
-bool ResetHook()
+EXPORT_API_ bool CALLBACK ResetHook()
 {
 	if (UnhookWindowsHookEx(hKeyHook) == 0) return 1;
 	return 0;
 }
 
-LRESULT CALLBACK KeyHookProc(int nCode, WPARAM wp, LPARAM lp)
+EXPORT_API_ LRESULT CALLBACK KeyHookProc(int nCode, WPARAM wp, LPARAM lp)
 {
 	if (nCode < 0)    //Œˆ‚Ü‚èŽ–
 		return CallNextHookEx(hKeyHook, nCode, wp, lp);
@@ -58,7 +58,7 @@ LRESULT CALLBACK KeyHookProc(int nCode, WPARAM wp, LPARAM lp)
 	return CallNextHookEx(hKeyHook, nCode, wp, lp);
 }
 
-LRESULT CALLBACK MouseHookProc(int nCode, WPARAM wp, LPARAM lp)
+EXPORT_API_ LRESULT CALLBACK MouseHookProc(int nCode, WPARAM wp, LPARAM lp)
 {
 	MOUSEHOOKSTRUCT *msg;
 	if (nCode < 0)    //Œˆ‚Ü‚èŽ–
