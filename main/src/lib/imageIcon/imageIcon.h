@@ -59,7 +59,7 @@ public:
 			std::abs(local_mouse.y) <= icon->all.size().y / 2.0f;
 	}
 	bool render() {
-		RECT rc = gdGeneral::gdBox2RECT(icon->all.rect());
+		RECT const rc = gdGeneral::gdBox2RECT(icon->all.rect());
 		capture->getSpriteBatch()->Begin();
 		capture->getSpriteBatch()->Draw(
 			capture->getResourceView(), // テクスチャ

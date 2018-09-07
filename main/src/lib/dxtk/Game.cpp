@@ -5,6 +5,7 @@
 #include "pch.h"
 #include "Game.h"
 #include <string>
+#include <cassert>
 
 extern void ExitGame();
 
@@ -26,8 +27,8 @@ void Game::Initialize(HWND window, int width, int height)
 	gdHwndManager::reload();
 
     m_window = window;
-    m_outputWidth = std::max(width, 1);
-    m_outputHeight = std::max(height, 1);
+    m_outputWidth = (std::max)(width, 1);
+    m_outputHeight = (std::max)(height, 1);
 
     CreateDevice();
 
@@ -39,9 +40,24 @@ void Game::Initialize(HWND window, int width, int height)
     // TODO: Change the timer settings if you want something other than the default variable timestep mode.
 	wallPaper.init(m_d3dContext.Get(), gdHwndManager::getWallPaper());
 	anime.init(m_d3dContext.Get(), gdHwndManager::getDesk());
-	for (int i = 0; i < gdHwndManager::getTaskBar().size(); i++) {
-		anime.setWallObj(gdHwndManager::getTaskBar()[i]);
-	}
+
+  for (auto &taskbar_hWnd : gdHwndManager::getTaskBar()) {
+    assert(taskbar_hWnd != NULL); // この assert は暫定的に挿入してある。
+
+    if (taskbar_hWnd == NULL) { // taskbar_hWnd が NULL を指している場合
+      assert(taskbar_hWnd == NULL); 
+      // Windows API でHWND が NULL を指している場合は、
+      // これは慣例的には、デスクトップウィンドウハンドルの事を意味する。
+      // あるいは無効なウィンドウハンドルである場合もある 
+      
+      // しかしながら、gdHwndManager にわざわざ NULL が入っているということは、
+      // 使い手側はデスクトップウィンドウを意図していると理解してそれに置き換える
+      taskbar_hWnd = ::GetDesktopWindow();
+    }
+    assert(taskbar_hWnd != NULL); // 二度目 これは既に置き換わっているので、このassert には引っかからないはず
+    anime.setWallObj(taskbar_hWnd);
+  }
+
 	Tick();
 	gdHwndManager::cover(m_window);
 }

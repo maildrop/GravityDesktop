@@ -13,8 +13,8 @@ private:
 	std::vector<gdObj> wall;
 	gdBox WorldRect;
 	float mostNear = 0.0f;
-	unsigned int mostNearIndex = -1;
-	unsigned int drugIndex = -1;
+	size_t mostNearIndex = -1;
+	size_t drugIndex = -1;
 	double start_time = 1.0; // アニメーションが開始されるまでの時間(s)
 	double time = 0.0; // アニメーションが開始されるまでの間の経過時間(s)
 	bool exitFlag = 0; // 終了フラグ
@@ -106,7 +106,7 @@ private:
 			}
 			exitAnimation2 = exitAnimation1*(2.0 - exitAnimation1);
 			for (size_t i = 0; i < obj.size(); i++) {
-				obj[i].setOrigin(exitAnimation2);
+				obj[i].setOrigin(static_cast<float>(exitAnimation2));
 			}
 		}
 		return 0;
@@ -133,20 +133,33 @@ public:
 		update();
 		return 0;
 	}
-	void setWallObj(RECT rc) {
+
+  
+  void setWallObj(RECT rc) {
 		// オブジェクト生成
-		wall.push_back(gdObj());
+    wall.emplace_back(); 
 		wall.back().init(&world, gdGeneral::RECT2gdBox(rc), false);
 	}
-	void setWallObj(HWND objHwnd) {
-		RECT rc;
-		GetWindowRect(objHwnd, &rc);
-		rc.left -= WorldRect.rect().x;
-		rc.top -= WorldRect.rect().y;
-		rc.right -= WorldRect.rect().x;
-		rc.bottom -= WorldRect.rect().y;
-		setWallObj(rc);
+	
+  /**
+   HWND objHwnd が指し示すウィンドウの領域を wallObjとして追加する。
+
+  */
+  void setWallObj(HWND objHwnd) {
+    RECT rc{};
+    assert(nullptr != objHwnd || !"WindowHandle objHnd != null");
+    if (GetWindowRect(objHwnd, &rc)) {
+      rc.left -= static_cast<decltype(rc.left)>(WorldRect.rect().x);
+      rc.top -= static_cast<decltype(rc.top)>(WorldRect.rect().y);
+      rc.right -= static_cast<decltype(rc.right)>(WorldRect.rect().x);
+      rc.bottom -= static_cast<decltype(rc.bottom)>(WorldRect.rect().y);
+      setWallObj(rc);
+    }
+    else {
+      // TODO: GetWindowRectに失敗したときの取り扱いを決める
+    }
 	}
+
 	bool update(bool stop = false) {
 		if (time <= start_time) {
 			time += 1.0f / getWorld()->getFps();
@@ -180,10 +193,19 @@ public:
 		return 0;
 	}
 	bool render() {
+#if 1
+    for (auto& o : obj) {
+      if (o.render()) {
+        return 1;
+      }
+    }
+    return 0;
+#else 
 		for (int i = 0; i < obj.size(); i++) {
 			if (obj[i].render()) return 1;
 		}
 		return 0;
+#endif 
 	}
 	inline gdWorld* getWorld() {
 		return &world;

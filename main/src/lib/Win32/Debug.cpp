@@ -15,5 +15,5 @@ void Debug::cout(double text) {
 	cout(std::to_wstring(text));
 }
 void Debug::cout(void* text) {
-	cout(std::to_wstring((unsigned long)text));
+	cout(std::to_wstring((unsigned long long)text));
 }

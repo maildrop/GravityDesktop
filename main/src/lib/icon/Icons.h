@@ -35,20 +35,24 @@ public:
 		// 処理終了
 		return 0;
 	}
-	bool update() {
+  bool update() {
 		// デスクトップのアイコン数取得
 		num_items = ListView_GetItemCount(hwnd);
-		// アイコン数に変更があれば配列長更新
+
+		// アイコン数に変更があれば配列そのものを更新
 		if (icon.size() != num_items) {
-			icon = std::vector<gdIcon>(num_items);
-			for (size_t i = 0; i < icon.size(); i++) {
-				icon[i].init(hwnd, pid_h, ptr, i);
-			}
+      std::swap(icon, std::vector<gdIcon>(num_items));
+      gdIcon::index_type index = 0;
+      for (auto& i : icon) {
+        i.init(hwnd, pid_h, ptr, index++);
+      }
 		}
-		// 全アイコン情報取得
+
+    // 全アイコン情報取得
 		for (size_t i = 0; i < icon.size(); i++) {
 			if(icon[i].update()) return 1;
 		}
+
 		return 0;
 	}
 	bool unselect() {
