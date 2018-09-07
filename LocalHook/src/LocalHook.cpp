@@ -15,7 +15,7 @@ RECT targetRect;
 
 HINSTANCE hInst;
 
-EXPORT_API_ bool CALLBACK SetHook(HWND set_hwnd, HWND set_target)
+EXPORT_API_ bool SetHook(HWND set_hwnd, HWND set_target)
 {
 	hwnd = set_hwnd;
 	target = set_target;
@@ -31,7 +31,7 @@ EXPORT_API_ bool CALLBACK SetHook(HWND set_hwnd, HWND set_target)
 	return 0;
 }
 
-EXPORT_API_ bool CALLBACK ResetHook()
+EXPORT_API_ bool ResetHook()
 {
 	if (UnhookWindowsHookEx(hKeyHook) == 0) return 1;
 	return 0;
