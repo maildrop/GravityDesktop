@@ -16,6 +16,9 @@ RECT targetRect = { 0 };
 
 static HINSTANCE hInst = nullptr;
 
+static LRESULT CALLBACK KeyHookProc(int, WPARAM, LPARAM);
+static LRESULT CALLBACK MouseHookProc(int, WPARAM, LPARAM);
+
 EXPORT_API_ bool SetHook(HWND set_hwnd, HWND set_target)
 {
 	hwnd = set_hwnd;
@@ -38,7 +41,7 @@ EXPORT_API_ bool ResetHook()
 	return 0;
 }
 
-LRESULT CALLBACK KeyHookProc(int nCode, WPARAM wp, LPARAM lp)
+static LRESULT CALLBACK KeyHookProc(int nCode, WPARAM wp, LPARAM lp)
 {
 	if (nCode < 0)    //Œˆ‚Ü‚èŽ–
 		return CallNextHookEx(hKeyHook, nCode, wp, lp);
@@ -59,7 +62,7 @@ LRESULT CALLBACK KeyHookProc(int nCode, WPARAM wp, LPARAM lp)
 	return CallNextHookEx(hKeyHook, nCode, wp, lp);
 }
 
-LRESULT CALLBACK MouseHookProc(int nCode, WPARAM wp, LPARAM lp)
+static LRESULT CALLBACK MouseHookProc(int nCode, WPARAM wp, LPARAM lp)
 {
 	MOUSEHOOKSTRUCT *msg;
 	if (nCode < 0)    //Œˆ‚Ü‚èŽ–
