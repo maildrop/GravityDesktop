@@ -23,8 +23,8 @@
 #define EXPORT_API_ __declspec(dllimport)
 #endif 
 
-EXPORT_API_ LRESULT CALLBACK KeyHookProc(int, WPARAM, LPARAM);
-EXPORT_API_ LRESULT CALLBACK MouseHookProc(int, WPARAM, LPARAM);
+LRESULT CALLBACK KeyHookProc(int, WPARAM, LPARAM);
+LRESULT CALLBACK MouseHookProc(int, WPARAM, LPARAM);
 EXPORT_API_ bool SetHook(HWND hwnd, HWND target);
 EXPORT_API_ bool ResetHook();
 

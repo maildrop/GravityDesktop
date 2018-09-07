@@ -10,10 +10,11 @@ HHOOK hMouseHook = 0;
 HWND hwnd = NULL;
 HWND target = NULL;
 DWORD tid = NULL;
-RECT targetRect;
+RECT targetRect = { 0 };
 #pragma data_seg()
 
-HINSTANCE hInst;
+
+static HINSTANCE hInst = nullptr;
 
 EXPORT_API_ bool SetHook(HWND set_hwnd, HWND set_target)
 {
@@ -37,7 +38,7 @@ EXPORT_API_ bool ResetHook()
 	return 0;
 }
 
-EXPORT_API_ LRESULT CALLBACK KeyHookProc(int nCode, WPARAM wp, LPARAM lp)
+LRESULT CALLBACK KeyHookProc(int nCode, WPARAM wp, LPARAM lp)
 {
 	if (nCode < 0)    //Œˆ‚Ü‚èŽ–
 		return CallNextHookEx(hKeyHook, nCode, wp, lp);
@@ -58,7 +59,7 @@ EXPORT_API_ LRESULT CALLBACK KeyHookProc(int nCode, WPARAM wp, LPARAM lp)
 	return CallNextHookEx(hKeyHook, nCode, wp, lp);
 }
 
-EXPORT_API_ LRESULT CALLBACK MouseHookProc(int nCode, WPARAM wp, LPARAM lp)
+LRESULT CALLBACK MouseHookProc(int nCode, WPARAM wp, LPARAM lp)
 {
 	MOUSEHOOKSTRUCT *msg;
 	if (nCode < 0)    //Œˆ‚Ü‚èŽ–
