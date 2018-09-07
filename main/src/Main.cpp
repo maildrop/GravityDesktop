@@ -113,9 +113,6 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 // Windows procedure
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-	PAINTSTRUCT ps;
-	HDC hdc;
-
 	static bool s_in_sizemove = false;
 	static bool s_in_suspend = false;
 	static bool s_minimized = false;
@@ -125,8 +122,17 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	switch (message)
 	{
 	case WM_PAINT:
-		hdc = BeginPaint(hWnd, &ps);
-		EndPaint(hWnd, &ps);
+  {
+#if 0
+    PAINTSTRUCT ps;
+    HDC hdc;
+    hdc = BeginPaint(hWnd, &ps);
+    EndPaint(hWnd, &ps);
+#else
+    ValidateRect(hWnd, NULL);
+
+#endif
+  }
 		break;
 
 	case WM_SIZE:
@@ -219,8 +225,25 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		// A menu is active and the user presses a key that does not correspond
 		// to any mnemonic or accelerator key. Ignore so we don't produce an error beep.
 		return MAKELRESULT(0, MNC_CLOSE);
+
+  case WM_KEYDOWN:
+  case WM_KEYUP:
+  case WM_LBUTTONDBLCLK:
+  case WM_RBUTTONDBLCLK:
+  case WM_MBUTTONDBLCLK:
+  case WM_LBUTTONDOWN:
+  case WM_RBUTTONDOWN:
+  case WM_MBUTTONDOWN:
+  case WM_LBUTTONUP:
+  case WM_RBUTTONUP:
+  case WM_MBUTTONUP:
+  case WM_MOUSEMOVE:
+  case WM_MOUSEWHEEL:
+    // êlä‘å¸ÇØÇÃì¸óÕèàóùÇÕÅAå„Ç≈Ç‹Ç∆ÇﬂÇƒèàóùÇ∑ÇÈÇÊÅB
+    Messages::add(hWnd, message, wParam, lParam);
+    break;
+
 	default:
-		Messages::add(hWnd, message, wParam, lParam);
 		break;
 	}
 	return DefWindowProc(hWnd, message, wParam, lParam);
