@@ -1,7 +1,5 @@
 #pragma once
 
-#include "pch.h"
-
 using namespace Microsoft::WRL;
 using namespace Microsoft::WRL::Details;
 

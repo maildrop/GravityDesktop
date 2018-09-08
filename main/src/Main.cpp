@@ -2,11 +2,9 @@
 // Main.cpp
 //
 #include "pch.h"
+#include <sstream>
 
 #include "lib\dxtk\Game.h"
-
-#include <string>
-#include <sstream>
 
 // Indicates to hybrid graphics systems to prefer the discrete part by default
 extern "C"

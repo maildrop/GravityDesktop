@@ -5,6 +5,9 @@
 
 #pragma once
 
+#if !defined( PCH_H_HEADER_GUARD )
+#define PCH_H_HEADER_GUARD 1
+
 #include <WinSDKVer.h>
 #if !defined( _WIN32_WINNT )
 /*
@@ -36,33 +39,40 @@
 
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
+
 #include <mmsystem.h>
 #include <Commctrl.h>
 
 #include <wrl/client.h>
 
-#include <d3d11_1.h>
 #include <dxgi1_2.h>
+#include <d3d11_1.h>
 #include <DirectXMath.h>
 #include <DirectXColors.h>
 
+#include <iostream>
+#include <sstream>
+#include <locale> 
+#include <codecvt> 
+#include <type_traits>
 #include <algorithm>
 #include <exception>
+#include <string>
+#include <vector>
 #include <memory>
 #include <stdexcept>
+#include <cassert>
 
 #include <SpriteBatch.h>
 #include <WICTextureLoader.h>
 #include <SimpleMath.h>
 
 
-#pragma comment(lib,"dxgi.lib")
 #ifdef _DEBUG
 #pragma comment(lib, "DirectXTK_d.lib")
 #else
 #pragma comment(lib, "DirectXTK.lib")
 #endif
-
 
 namespace DX
 {
@@ -75,3 +85,5 @@ namespace DX
         }
     }
 }
+
+#endif /* !defined( PCH_H_HEADER_GUARD ) */
