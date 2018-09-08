@@ -2,7 +2,6 @@
 // Main.cpp
 //
 #include "pch.h"
-#include <sstream>
 
 #include "lib\dxtk\Game.h"
 
