@@ -1,4 +1,3 @@
-#include <cstdio>
 #include <tchar.h>
 #include <string>
 #include <sstream>
@@ -12,7 +11,6 @@ HWND target = NULL;
 DWORD tid = NULL;
 RECT targetRect = { 0 };
 #pragma data_seg()
-
 
 static HINSTANCE hInst = nullptr;
 
