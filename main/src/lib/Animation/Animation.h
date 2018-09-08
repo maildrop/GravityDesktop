@@ -1,6 +1,12 @@
+/*
+
+
+*/
 #pragma once
 
-#include "pch.h"
+#if !defined( ANIMATION_H_HEADER_GUARD )
+#define ANIMATION_H_HEADER_GUARD 1
+
 #include "..\capture\all_inc.h"
 #include "..\Win32\all_inc.h"
 #include "..\imageIcon\imageIcons.h"
@@ -10,28 +16,47 @@ class Anime {
 private:
 	HWND hwnd;
 	gdImageIcons icons;
-	bool exit_step = 0;
+	bool exit_step; // TODO: 条件式がよくわからないフラグ 
 
 public:
+  /*
+    コンストラクタ 
+    コンストラクタで構築後に init で初期化する二段階初期化法を使っている
+  */
+  Anime() : hwnd{ NULL }, icons{}, exit_step{ false } {
+  }
 
-	bool init(ID3D11DeviceContext1* context, HWND set_hwnd) {
+	inline bool init(ID3D11DeviceContext1* context, HWND set_hwnd) {
 		hwnd = set_hwnd;
 		// Box2D初期化
 		if (icons.init(hwnd, context)) return 1;
 		return 0;
 	}
 
-	void setWallObj(HWND set_hwnd) {
+	inline void setWallObj(HWND set_hwnd) {
 		icons.setWallObj(set_hwnd);
 	}
 
-	bool render() {
+	inline bool render() {
 		// 描画
-		if (exit_step == 1) PostMessage(gdHwndManager::mine, WM_CLOSE, NULL, NULL);
-		if (icons.update()) exit_step = 1;
-		if (exit_step == 0) icons.render();
+    do {
+
+      if (exit_step) {
+        PostMessage(gdHwndManager::mine, WM_CLOSE, NULL, NULL);
+      }
+      if (icons.update()) {
+        exit_step = true;
+      }
+
+      if (! exit_step ) {
+        icons.render();
+      }
+
+    } while (false);
 
 		// 処理の終了
 		return 0;
 	}
 };
+
+#endif /* !defined( ANIMATION_H_HEADER_GUARD ) */
